@@ -134,15 +134,32 @@
         }
 
         .container-aside {
+            height: calc(100vh - 150px);
             display: flex;
             flex-wrap: nowrap;
-            overflow-x: auto; /* Cambiado a auto para permitir el scroll cuando sea necesario */
+            overflow-x: auto;
             margin-bottom: 20px;
-            scroll-behavior: smooth; /* Añadido para un desplazamiento suave */
-            scrollbar-width: none; /* Ocultar la barra de desplazamiento */
-            -ms-overflow-style: none; /* Ocultar la barra de desplazamiento en Internet Explorer */
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }        
+
+        .container-aside-details {
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-bottom: 20px;
         }
-        
+        .container-aside-details > aside {
+            display: inline-block;
+            vertical-align: top;
+            width: 300px;
+            margin-right: 20px;
+            white-space: normal;
+        }
+        .container-aside-details > aside:last-child {
+            margin-right: 0;
+        }
     
         aside {
             flex: 0 0 auto;
@@ -154,7 +171,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Alinear los botones en la parte inferior */
+            justify-content: flex-end;
         }
     
         aside h2 {
@@ -181,9 +198,9 @@
         }
     
         aside button {
-            margin-top: relative;
-            margin-bottom: 30px;
-            margin-left: 100px;
+            margin-top: auto;
+            margin-bottom: 10px;
+            margin-left: auto;
             padding: 12px 24px;
             font-size: 16px;
             font-weight: bold;
@@ -216,21 +233,21 @@
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(calc(-100% * 5)); /* Cambiado a -100% * 5 para ajustar según el número de asides */
+                transform: translateX(calc(-100% * 5));
             }
         }
 
         @media screen and (max-width: 768px) {
             .container-aside {
                 flex-direction: column;
-                overflow-x: initial; /* Resetear el desplazamiento horizontal en dispositivos pequeños */
+                overflow-x: initial;
                 white-space: normal;
-                margin-bottom: 0; /* Resetear el margen inferior en dispositivos pequeños */
+                margin-bottom: 0;
             }
     
             aside {
                 width: 100%;
-                margin-right: 0; /* Resetear el margen derecho en dispositivos pequeños */
+                margin-right: 0;
             }
         }
 
@@ -265,11 +282,11 @@
             font-size: 24px;
             cursor: pointer;
             margin-top: 10px;
-            margin-bottom: 10px; /* Agregamos margen inferior */
-            position: absolute; /* Cambiamos a posición absoluta */
-            top: calc(100% - 40px); /* Ajustamos la posición vertical para que esté cerca del borde inferior */
-            left: 50%; /* Ajustamos la posición horizontal al centro */
-            transform: translateX(-50%); /* Centramos horizontalmente */
+            margin-bottom: 10px;
+            position: absolute;
+            top: calc(100% - 40px);
+            left: 50%;
+            transform: translateX(-50%);
         }        
         
         .expand-icon:hover {
@@ -420,10 +437,10 @@
             </article>
 
             <details>
-                <summary style="font-size: 7vw;">Ejemplos de Éxitos de Tiendas Online</summary>
-                <div class="container-aside">
+                <summary style="font-size: 7vw;">Ejemplos de Éxitos</summary>
+                <div class="container-aside-details"> 
                     <aside>
-                        <img src="https://guatemaladigital.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.54c48dfa.jpg&w=384&q=100" alt="Imagen de ejemplo">
+                        <img src="https://guatemaladigital.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.54c48dfa.jpg&w=384&q=100" alt="Imagen de ejemplo" style="max-width: 100%;">
                         <h2>Guatemala Digital</h2>
                         <p> Fundada en 2007 por el guatemalteco Mario Porres, esta empresa de tecnología busca innovar constantemente en los procesos de compraventa en línea. Ofrecen más de 30,000 artículos disponibles para entrega inmediata y millones de productos bajo demanda. Registró un tráfico de 105,600 visitas en julio.</p>
                         <a href="https://guatemaladigital.com/" target="_blank">
@@ -467,7 +484,8 @@
 
         </div>
     </div>
-
+    <div style="height: 200px;"></div>
+    <div style="background-color: #FFFB00; height: 5px; margin-top: 10px;"></div>
 </body>
 
 </html>
