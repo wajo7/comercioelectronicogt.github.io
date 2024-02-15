@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .logo b {
+            color: #46a2fd;
+        }
+
+        .menu nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .menu nav ul li {
+            margin: 0 20px;
+        }
+
+        .menu nav ul li a {
+            color: #777777;
+            font-size: 16px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .menu nav ul li a:hover {
+            color: #46a2fd;
+        }
+
+        .container-cover {
+            height: 500px;
+            background-image: url('https://via.placeholder.com/1500x500');
+            background-position: center;
+            background-size: cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .container-cover h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .container-cover p {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .container-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        article h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        article p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        article img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .container-aside {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto; /* Cambiado a auto para permitir el scroll cuando sea necesario */
+            margin-bottom: 20px;
+            scroll-behavior: smooth; /* Añadido para un desplazamiento suave */
+            scrollbar-width: none; /* Ocultar la barra de desplazamiento */
+            -ms-overflow-style: none; /* Ocultar la barra de desplazamiento en Internet Explorer */
+        }
+        
+    
+        aside {
+            flex: 0 0 auto;
+            width: calc(33.33% - 20px);
+            background-color: #fff;
+            padding: 20px;
+            margin-right: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Alinear los botones en la parte inferior */
+        }
+    
+        aside h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+    
+        aside p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+    
+        aside img {
+            max-width: 100%;
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            object-fit: cover;
+            margin: 0 auto;
+            display: block;
+        }
+    
+        aside button {
+            margin-top: relative;
+            margin-bottom: 30px;
+            margin-left: 100px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #FFFB00;
+            border: 2px solid #FFFB00;
+            color: #000000;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        aside button:hover {
+            background-color: #FFFB00;
+            border-color: #80b3ff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        aside button:focus {
+            outline: none;
+        }
+        
+        aside button:active {
+            transform: translateY(1px);
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-100% * 5)); /* Cambiado a -100% * 5 para ajustar según el número de asides */
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .container-aside {
+                flex-direction: column;
+                overflow-x: initial; /* Resetear el desplazamiento horizontal en dispositivos pequeños */
+                white-space: normal;
+                margin-bottom: 0; /* Resetear el margen inferior en dispositivos pequeños */
+            }
+    
+            aside {
+                width: 100%;
+                margin-right: 0; /* Resetear el margen derecho en dispositivos pequeños */
+            }
+        }
+
+        .portada {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background-color: rgba(253, 250, 70, 0.95);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .titulo-icono {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .portada h1 {
+            font-size: 5vw;
+            font-weight: 700;
+            color: #333;
+            margin-right: 2vw;
+        }
+        
+        .expand-icon {
+            font-size: 24px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 10px; /* Agregamos margen inferior */
+            position: absolute; /* Cambiamos a posición absoluta */
+            top: calc(100% - 40px); /* Ajustamos la posición vertical para que esté cerca del borde inferior */
+            left: 50%; /* Ajustamos la posición horizontal al centro */
+            transform: translateX(-50%); /* Centramos horizontalmente */
+        }        
+        
+        .expand-icon:hover {
+            color: #46a2fd;
+        }        
+
+        .portada.oculto {
+            transform: translateY(-50%);
+        }
+
+        .contenido {
+            margin-top: 150px;
+            padding-top: 20px;
+        }
+
+        .info-personal {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .info-personal h2 {
+            margin-top: 1vh;
+            font-size: 3vw;
+            font-weight: normal;
+        }
+
+        .info-personal p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="portada">
+        <div class="titulo-icono">
+            <h1>Comercio Electrónico En Guatemala</h1>
+            <i class="fas fa-chevron-down expand-icon"></i>
+        </div>
+    </div>    
+    
+    <div class="contenido" style="margin-top: 150px;">
+    
+        <div class="info-personal">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Escudo_de_la_universidad_Mariano_G%C3%A1lvez_Guatemala.svg/1200px-Escudo_de_la_universidad_Mariano_G%C3%A1lvez_Guatemala.svg.png" alt="Logo UMG" style="width: 100px;">
+            <h2 style="font-size: 24px;">Universidad Mariano Gálvez de Guatemala</h2>
+            <p><strong>Curso:</strong> Administración de Tecnologías de Información</p>
+            <p><strong>Nombre:</strong> Walter Josué Ruiz Gálvez</p>
+            <p><strong>Carnet:</strong> 6590-20-10484</p>
+        </div>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var portada = document.querySelector('.portada');
+                var lastScrollTop = 0;
+                var isExpanded = false;
+            
+                window.addEventListener('scroll', function() {
+                    var scrollTop = window.scrollY || window.pageYOffset;
+            
+                    if (scrollTop === 0) {
+                        portada.style.top = '0';
+                    } else {
+                        portada.style.top = '-150px';
+                    }
+            
+                    if (scrollTop > lastScrollTop) {
+                        portada.style.transform = 'translateY(-100%)';
+                    } else {
+                        portada.style.transform = 'translateY(0)';
+                    }
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            
+                    if (scrollTop === 0 && isExpanded) {
+                        portada.style.height = '150px';
+                        isExpanded = false;
+                        var expandIcon = document.querySelector('.expand-icon');
+                        expandIcon.classList.remove('fa-chevron-up');
+                        expandIcon.classList.add('fa-chevron-down');
+                    }
+                });
+            
+                var expandIcon = document.querySelector('.expand-icon');
+                var contenido = document.querySelector('.contenido');
+                var infoPersonal = document.querySelector('.info-personal');
+            
+                expandIcon.addEventListener('click', function() {
+                    if (isExpanded) {
+                        portada.style.height = '150px';
+                        isExpanded = false;
+                        expandIcon.classList.remove('fa-chevron-up');
+                        expandIcon.classList.add('fa-chevron-down');
+                    } else {
+                        portada.style.height = (contenido.offsetTop + contenido.offsetHeight) + 'px';
+                        isExpanded = true;
+                        expandIcon.classList.remove('fa-chevron-down');
+                        expandIcon.classList.add('fa-chevron-up');
+                    }
+                });                
+            });
+            
+        </script> 
+    </div>             
+
+        <div class="container-content">
+            <article>
+                <h1>¿Qué es el Comercio Electrónico?</h1>
+                <p>El comercio electrónico, también conocido como e-commerce, se refiere a la compra y venta de bienes y servicios a través de Internet y otras redes electrónicas. En el comercio electrónico, las transacciones se realizan de forma electrónica, sin la necesidad de una interacción física entre comprador y vendedor. Este tipo de comercio puede llevarse a cabo en diversos formatos, como tiendas en línea, subastas en línea, plataformas de intercambio de productos y servicios, entre otros.</p>
+                <p>El comercio electrónico ha revolucionado la forma en que las empresas realizan negocios y cómo los consumidores adquieren productos y servicios. Ofrece una amplia gama de beneficios, incluida la conveniencia de comprar desde cualquier lugar y en cualquier momento, una mayor variedad de productos disponibles, comparación de precios fácil y rápida, y la posibilidad de acceder a productos de todo el mundo.</p>
+                <h1>Comercio Electrónico en Guatemala</h1>
+                <p>En el contexto de la transformación digital que está experimentando Guatemala y el mundo entero, el comercio electrónico emerge como un fenómeno de gran relevancia en el ámbito económico y social. En este informe, exploraremos el panorama actual del comercio electrónico en Guatemala, analizando su crecimiento, sus desafíos y sus posibles impactos en la economía y la sociedad guatemalteca. Desde sus primeros pasos hasta su estado actual, pasando por las proyecciones futuras, este informe proporcionará una visión completa del comercio electrónico en Guatemala, destacando las oportunidades y los obstáculos que enfrenta en su camino hacia un desarrollo sostenible y próspero.</p>
+                <img src="img/img4.gif" alt="">
+                <h1>Estado Actual del Comercio Electrónico en Guatemala</h1>
+                <p>El comercio electrónico en Guatemala ha mostrado un crecimiento sostenido en los últimos años, aunque aún se encuentra en una etapa inicial en comparación con otros países de la región. Según datos de la Cámara de Comercio de Guatemala, se estima que el comercio electrónico ha crecido un 25% anual en el país durante la última década. Sin embargo, solo representa aproximadamente el 2% del total de ventas minoristas, lo que indica un gran potencial de crecimiento.</p>
+                <h1>Factores que impulsan el crecimiento</h1>
+                <h3>Acceso a Internet:</h3>
+                <p>El crecimiento del acceso a Internet en Guatemala ha sido un factor clave en el aumento del comercio electrónico. Con una mayor penetración de Internet y la proliferación de dispositivos móviles, más personas tienen la capacidad de realizar compras en línea desde cualquier lugar y en cualquier momento.</p>   
+                <h3>Adopción de dispositivos móviles:</h3>
+                <p>El uso generalizado de teléfonos inteligentes ha facilitado el acceso a plataformas de comercio electrónico, permitiendo a los consumidores realizar compras de manera rápida y conveniente desde sus dispositivos móviles.</p>
+                <h3>Mayor confianza en las transacciones en línea:</h3>
+                <p>A medida que los consumidores guatemaltecos se familiarizan más con las transacciones en línea y las medidas de seguridad implementadas por las plataformas de comercio electrónico, están ganando más confianza para realizar compras en línea.</p>
+                <h1>Desafíos del Comercio Electrónico en Guatemala</h1>
+                <h2>Infraestructura logística limitada:</h2>
+                <p>La falta de infraestructura logística desarrollada en algunas áreas de Guatemala dificulta la entrega oportuna y confiable de productos comprados en línea, lo que puede afectar la experiencia del cliente y la reputación de las empresas de comercio electrónico.</p>
+                <h2>Desconfianza en los métodos de pago en línea: </h2>
+                <p>Aunque la confianza en las transacciones en línea está en aumento, aún persiste cierta desconfianza entre los consumidores guatemaltecos en cuanto a los métodos de pago en línea, especialmente en lo que respecta a la seguridad de sus datos financieros.</p>
+                <h2>Regulaciones y marco legal:</h2>
+                <p>La falta de regulaciones claras y un marco legal específico para el comercio electrónico pueden ser un obstáculo para su crecimiento. La incertidumbre legal puede disuadir a las empresas de invertir en el desarrollo de sus plataformas de comercio electrónico.</p>
+                <h1>Oportunidades para el Futuro</h1>
+                <p>A pesar de los desafíos, el comercio electrónico en Guatemala presenta diversas oportunidades para su expansión y desarrollo futuro:</p>
+                <h2>Expansión de la infraestructura logística: </h2>
+                <p>Invertir en mejorar la infraestructura logística, incluida la expansión de servicios de entrega rápida y confiable, puede mejorar la experiencia del cliente y fomentar un mayor crecimiento del comercio electrónico en el país.</p>
+                <h2>Educación y concienciación:</h2>
+                <p>Continuar educando a los consumidores sobre los beneficios y la seguridad del comercio electrónico puede ayudar a aumentar la confianza y la adopción de esta modalidad de compra.</p>
+                <h2>Apoyo gubernamental y regulación adecuada:</h2>
+                <p>El gobierno guatemalteco puede desempeñar un papel importante en el fomento del comercio electrónico mediante la implementación de políticas y regulaciones claras que brinden seguridad jurídica tanto a consumidores como a empresas.</p>
+                <h2>Desarrollo de plataformas locales: </h2>
+                <p>Fomentar el desarrollo de plataformas de comercio electrónico locales y apoyar a emprendedores y pequeñas empresas en la creación de sus propias tiendas en línea puede contribuir significativamente al crecimiento del sector.</p>
+                <h2></h2>
+                <p></p>
+            </article>
+
+            <details>
+                <summary style="font-size: 3vw;">Ejemplos de Éxitos</summary>
+                <div class="container-aside">
+                    <aside>
+                        <img src="https://guatemaladigital.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.54c48dfa.jpg&w=384&q=100" alt="Imagen de ejemplo">
+                        <h2>Guatemala Digital</h2>
+                        <p> Fundada en 2007 por el guatemalteco Mario Porres, esta empresa de tecnología busca innovar constantemente en los procesos de compraventa en línea. Ofrecen más de 30,000 artículos disponibles para entrega inmediata y millones de productos bajo demanda. Registró un tráfico de 105,600 visitas en julio.</p>
+                        <a href="https://guatemaladigital.com/" target="_blank">
+                            <button>leer más</button>
+                        </a>
+                    </aside>
+                    <aside>
+                        <img src="data:image/jpeg;base64,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" alt="Imagen de ejemplo">
+                        <h2>Charming</h2>
+                        <p>Esta tienda tiene una presencia activa en Facebook con una página llamada Charming Gt. Tienen 142,466 seguidores y se describen como una tienda en línea que realiza envíos a toda Guatemala. Su catálogo incluye productos de belleza y cuidado personal</p>
+                        <a href="https://www.instagram.com/charming.gt/" target="_blank">
+                            <button>leer más</button>
+                        </a>
+                    </aside>
+                    <aside>
+                        <img src="https://cdn.kemik.gt/assets/logo-mobile-2022-11-02-2.png" alt="Imagen de ejemplo">
+                        <h2>Kemik</h2>
+                        <p> En Kemik, los guatemaltecos pueden adquirir una amplia variedad de productos sin necesidad de salir de la oficina o casa. La entrega llega al lugar donde los usuarios lo prefieran. Kemik recibió más de 80,000 visitas en julio.</p>
+                        <a href="https://www.kemik.gt/" target="_blank">
+                            <button>leer más</button>
+                        </a>
+                    </aside>
+                    <aside>
+                        <img src="https://dermacentergt.com/wp-content/uploads/2020/03/logo-dermacenter-1.jpg" alt="Imagen de ejemplo">
+                        <h2>Derma Center</h2>
+                        <p>Entre los e-commerce más populares de Guatemala, también se encuentran aquellos negocios especializados en el cuidado de la salud. Derma Center ofrece las mejores marcas para el cuidado dermatológico de la piel</p>
+                        <a href="https://dermacentergt.com/" target="_blank">
+                            <button>leer más</button>
+                        </a>
+                    </aside>
+                    <aside>
+                        <img src="https://cdn.pacifiko.com/image/Pacifiko-small-logo2023.png" alt="Imagen de ejemplo">
+                        <h2>Pacifiko</h2>
+                        <p>Esta tienda en línea ofrece una extensa variedad de productos, desde accesorios electrónicos hasta productos de belleza, salud e higiene, canastas navideñas y más. Con un tráfico de 76,600 visitas, Pacifiko se ha convertido en una opción ideal para los guatemaltecos</p>
+                        <a href="https://www.pacifiko.com/" target="_blank">
+                            <button>leer más</button>
+                        </a>
+                    </aside>
+                </div>
+            </details>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+
